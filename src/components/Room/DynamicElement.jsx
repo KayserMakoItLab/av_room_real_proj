@@ -1,5 +1,6 @@
 import { useControlOrbit } from "@/context";
 import { Gltf, PivotControls } from "@react-three/drei";
+import { RigidBody } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
 
 const DynamicElement = ({ path, model }) => {

@@ -1,5 +1,5 @@
 import { dynamicAssets } from "@/data/assets";
-import { Button, Stack, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { Box, Button, Stack, Text, Wrap, WrapItem } from "@chakra-ui/react";
 
 const AppliancesList = ({ show }) => {
   const existElement = [];
@@ -8,26 +8,25 @@ const AppliancesList = ({ show }) => {
       <Text fontSize={12} opacity={0.6} alignSelf={"center"}>
         Appliances
       </Text>
-      <Wrap spacing={5} alignSelf={"center"}>
-        {dynamicAssets.map(({ id, type, icon, name, path }) => {
+      <Box display={"flex"} flexWrap={"wrap"} gap={5} justifyContent={"center"}>
+        {dynamicAssets.map(({ id, type, icon }) => {
           if (existElement.includes(type)) {
             return null;
           } else {
             existElement.push(type);
             return (
-              <WrapItem key={id}>
-                <Button
-                  onClick={() => show({ status: true, element: type })}
-                  colorScheme="gray"
-                  variant="outline"
-                >
-                  {icon}
-                </Button>
-              </WrapItem>
+              <Button
+                key={id}
+                onClick={() => show({ status: true, element: type })}
+                colorScheme="gray"
+                variant="outline"
+              >
+                {icon}
+              </Button>
             );
           }
         })}
-      </Wrap>
+      </Box>
     </Stack>
   );
 };
