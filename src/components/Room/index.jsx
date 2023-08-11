@@ -12,6 +12,7 @@ import {
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useRef } from "react";
 import DynamicElement from "./DynamicElement";
+import { EffectComposer, N8AO } from "@react-three/postprocessing";
 
 const Room = () => {
   const [elementDetails] = useDynamicElement();
@@ -49,6 +50,9 @@ const Room = () => {
     <>
       <Suspense fallback={<Loader />}>
         <Canvas shadows>
+          <EffectComposer>
+            <N8AO aoRadius={20} intensity={3} screenSpaceRadius />
+          </EffectComposer>
           <ambientLight intensity={1} />
           <directionalLight
             intensity={5}
