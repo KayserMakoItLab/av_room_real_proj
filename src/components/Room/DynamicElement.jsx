@@ -1,6 +1,5 @@
 import { useControlOrbit } from "@/context";
 import { Gltf, PivotControls } from "@react-three/drei";
-import { RigidBody } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
 
 const DynamicElement = ({ path, model }) => {
@@ -20,6 +19,13 @@ const DynamicElement = ({ path, model }) => {
             if (node?.isMesh) {
               node.castShadow = true;
               node.receiveShadow = true;
+            } else {
+              node?.children.map((node) => {
+                if (node?.isMesh) {
+                  node.castShadow = true;
+                  node.receiveShadow = true;
+                }
+              });
             }
           });
         }
@@ -40,10 +46,10 @@ const DynamicElement = ({ path, model }) => {
         disableSliders={showControls}
       >
         <Gltf
+          castShadow
+          receiveShadow
           ref={objectRef}
           src={path}
-          receiveShadow={true}
-          castShadow={true}
           onClick={() => {
             setView(!view);
             setShowControls(!showControls);
