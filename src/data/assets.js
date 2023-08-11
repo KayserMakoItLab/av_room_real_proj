@@ -1,5 +1,5 @@
 import { PiTelevisionFill } from "react-icons/pi";
-import { GiTable } from "react-icons/gi";
+import { GiTable, GiOfficeChair } from "react-icons/gi";
 import { BsWebcamFill, BsSpeakerFill } from "react-icons/bs";
 
 export const dynamicAssets = [
@@ -49,13 +49,27 @@ export const dynamicAssets = [
     id: 7,
     type: "speaker",
     icon: <BsSpeakerFill />,
-    name: "Sony",
+    name: "Sony XMS",
     path: "/assets/speakers/Speaker.gltf",
   },
   {
     id: 8,
     type: "speaker",
     icon: <BsSpeakerFill />,
+    name: "None",
+    path: "",
+  },
+  {
+    id: 9,
+    type: "chair",
+    icon: <GiOfficeChair />,
+    name: "Steel Chair",
+    path: "/assets/chairs/Chair.gltf",
+  },
+  {
+    id: 10,
+    type: "chair",
+    icon: <GiOfficeChair />,
     name: "None",
     path: "",
   },
