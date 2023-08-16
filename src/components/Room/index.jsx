@@ -1,4 +1,3 @@
-"use client";
 import { useControlOrbit, useDynamicElement } from "@/context";
 import {
   Center,
@@ -68,8 +67,12 @@ const Room = () => {
             />
             {elementDetails?.paths?.map(
               (elementPath, index) =>
-                elementPath && (
-                  <DynamicElement key={index} path={elementPath} model="app" />
+                elementPath.path && (
+                  <DynamicElement
+                    key={index}
+                    path={elementPath.path}
+                    coordinates={elementPath.coordinates}
+                  />
                 )
             )}
           </Center>

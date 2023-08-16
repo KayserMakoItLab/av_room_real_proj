@@ -2,7 +2,7 @@ import { useControlOrbit } from "@/context";
 import { Gltf, PivotControls } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 
-const DynamicElement = ({ path, model }) => {
+const DynamicElement = ({ path, coordinates }) => {
   const objectRef = useRef();
   const [showControls, setShowControls] = useState(true);
   const [view, setView] = useControlOrbit();
@@ -33,30 +33,34 @@ const DynamicElement = ({ path, model }) => {
     }
   }, [objectRef.current]);
 
-  return model !== "app" ? (
-    <Gltf ref={objectRef} src={path} receiveShadow={true} castShadow={true} />
-  ) : (
-    <>
-      <PivotControls
-        activeAxes={[1, 1, 1]}
-        anchor={[1, 0, 0]}
-        scale={0.7}
-        disableAxes={showControls}
-        disableRotations={showControls}
-        disableSliders={showControls}
-      >
-        <Gltf
-          castShadow
-          receiveShadow
-          ref={objectRef}
-          src={path}
-          onClick={() => {
-            setView(!view);
-            setShowControls(!showControls);
-          }}
-        />
-      </PivotControls>
-    </>
+  console.log("coordinates", coordinates);
+
+  return (
+    coordinates && (
+      <>
+        <PivotControls
+          activeAxes={[1, 1, 1]}
+          anchor={[1, 0, 0]}
+          scale={0.7}
+          disableAxes={showControls}
+          disableRotations={showControls}
+          disableSliders={showControls}
+        >
+          <Gltf
+            position={coordinates.position}
+            rotation={coordinates.rotation}
+            castShadow
+            receiveShadow
+            ref={objectRef}
+            src={path}
+            onClick={() => {
+              setView(!view);
+              setShowControls(!showControls);
+            }}
+          />
+        </PivotControls>
+      </>
+    )
   );
 };
 
