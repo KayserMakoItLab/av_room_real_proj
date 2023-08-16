@@ -1,11 +1,7 @@
-import ControlPanelView from "@/components/ControlPanel";
-import Room from "@/components/Room";
+import App from "./App";
 
 export default function Home() {
   return (
-    <>
-      <ControlPanelView />
-      <Room />
-    </>
+    <App />
   );
 }

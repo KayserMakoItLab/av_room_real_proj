@@ -13,13 +13,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Chakra>
-        <DynamicElementProvider>
-          <ControlOrbitProvider>
-            <body className={inter.className}>{children}</body>
-          </ControlOrbitProvider>
-        </DynamicElementProvider>
-      </Chakra>
+      <body className={inter.className}>
+        <Chakra>
+          <DynamicElementProvider>
+            <ControlOrbitProvider>
+              {children}
+            </ControlOrbitProvider>
+          </DynamicElementProvider>
+        </Chakra>
+      </body>
     </html>
   );
 }
