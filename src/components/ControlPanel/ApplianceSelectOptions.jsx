@@ -6,6 +6,7 @@ const ApplianceSelectOptions = ({ selectedElement }) => {
   const [elementDetails, setElemenetDetails] = useDynamicElement();
 
   const handleElementSelect = (element) => {
+    console.log("element", element);
     let position = [];
     let rotation = [];
     if (element.type === "tv") {
@@ -25,9 +26,7 @@ const ApplianceSelectOptions = ({ selectedElement }) => {
       rotation = [0, -Math.PI / 2, 0];
     }
 
-    console.log("elementDetails", elementDetails);
     if (elementDetails.elements.includes(element.type)) {
-      console.log("elementDetails11", elementDetails);
       const indexValue = elementDetails.elements.indexOf(element.type);
       elementDetails.elements.splice(indexValue, 1, element.type);
       elementDetails.types.splice(indexValue, 1, element.id);
@@ -35,7 +34,6 @@ const ApplianceSelectOptions = ({ selectedElement }) => {
         path: element.path,
         coordinates: { position: position, rotation: rotation },
       });
-      console.log("elementDetails1111", elementDetails);
 
       setElemenetDetails({
         elements: elementDetails.elements,
@@ -75,11 +73,20 @@ const ApplianceSelectOptions = ({ selectedElement }) => {
               fontWeight={400}
               onClick={() => handleElementSelect(element)}
             >
-              {element?.name ? element?.name : "None"}
+              {element?.name}
             </Button>
           );
         }
       })}
+      <Button
+        w={"100%"}
+        variant={"outline"}
+        fontSize={14}
+        fontWeight={400}
+        onClick={() => handleElementSelect({ type: selectedElement, path: "" })}
+      >
+        None
+      </Button>
     </Stack>
   );
 };

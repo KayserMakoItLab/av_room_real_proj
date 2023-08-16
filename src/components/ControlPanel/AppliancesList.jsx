@@ -1,5 +1,5 @@
 import { dynamicAssets } from "@/data/assets";
-import { Box, Button, Stack, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { Box, Button, Stack, Text } from "@chakra-ui/react";
 
 const AppliancesList = ({ show }) => {
   const existElement = [];
