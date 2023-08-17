@@ -25,37 +25,37 @@ export const useDynamicElement = () => {
 
 // Room Details Provider
 
-// const RoomDataContext = createContext();
+const RoomDataContext = createContext();
 
-// export const RoomDataProvider = ({children}) => {
-//   const state = useState({
-//     roomType:'',
-//     width:'',
-//     height:'',
-//     length:'',
-//     seater:'',
-//     frontWallType:'',
-//     backWallType:'',
-//     rightWallType:'',
-//     leftWallType:'',
-//     doorType:'',
-//     doorSide:'',
-//     doorThickness:'',
-//     tableType:'',
-//     tableColor:'',
-//     chairType:'',
-//     chairColor:''
-//   })
-//   return <RoomDataContext.Provider value={state}>
-//     {children}
-//   </RoomDataContext.Provider>
-// }
+export const RoomDataProvider = ({children}) => {
+  const state = useState({
+    roomType:'',
+    width:'',
+    height:'',
+    length:'',
+    seater:'',
+    frontWallType:'',
+    backWallType:'',
+    rightWallType:'',
+    leftWallType:'',
+    doorType:'',
+    doorSide:'',
+    doorThickness:'',
+    tableType:'',
+    tableColor:'',
+    chairType:'',
+    chairColor:''
+  })
+  return <RoomDataContext.Provider value={state}>
+    {children}
+  </RoomDataContext.Provider>
+}
 
-// export const useRoomData = () => {
-//   const value = useContext(RoomDataContext);
-//   if (!value) throw error("useRoomData must be inside it's provider");
-//   return value;
-// }
+export const useRoomData = () => {
+  const value = useContext(RoomDataContext);
+  if (!value) throw console.error("useRoomData must be inside it's provider");
+  return value;
+}
 
 
 // Color selcetion for meshes

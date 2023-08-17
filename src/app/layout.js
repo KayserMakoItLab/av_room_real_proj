@@ -1,7 +1,7 @@
 import Chakra from '@/components/Chakra';
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { ControlOrbitProvider, DynamicElementProvider } from '@/context';
+import { ControlOrbitProvider, DynamicElementProvider, RoomDataProvider } from '@/context';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         <Chakra>
           <DynamicElementProvider>
             <ControlOrbitProvider>
-              {children}
+              <RoomDataProvider>{children}</RoomDataProvider>
             </ControlOrbitProvider>
           </DynamicElementProvider>
         </Chakra>

@@ -1,7 +1,5 @@
-import App from "./App";
+import RoomCreationForm from "@/components/RoomCreationForm";
 
 export default function Home() {
-  return (
-    <App />
-  );
+  return <RoomCreationForm />;
 }
