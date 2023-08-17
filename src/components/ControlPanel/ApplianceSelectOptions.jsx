@@ -1,12 +1,15 @@
 import { useDynamicElement } from "@/context";
 import { dynamicAssets } from "@/data/assets";
 import { Button, Stack, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { MdDelete, MdAdd } from "react-icons/md";
 
 const ApplianceSelectOptions = ({ selectedElement }) => {
   const [elementDetails, setElemenetDetails] = useDynamicElement();
+  const [addMoreElements, setAddMoreElements] = useState(false);
+  const [currentElement, setCurrentElement] = useState();
 
   const handleElementSelect = (element) => {
-    console.log("element", element);
     let position = [];
     let rotation = [];
     if (element.type === "tv") {
@@ -27,19 +30,38 @@ const ApplianceSelectOptions = ({ selectedElement }) => {
     }
 
     if (elementDetails.elements.includes(element.type)) {
-      const indexValue = elementDetails.elements.indexOf(element.type);
-      elementDetails.elements.splice(indexValue, 1, element.type);
-      elementDetails.types.splice(indexValue, 1, element.id);
-      elementDetails.paths.splice(indexValue, 1, {
-        path: element.path,
-        coordinates: { position: position, rotation: rotation },
-      });
+      if (addMoreElements) {
+        console.log("currentElement", currentElement);
+        setElemenetDetails({
+          elements: [...elementDetails.elements, currentElement.type],
+          types: [...elementDetails.types, elementDetails.types.length + 1],
+          paths: [
+            ...elementDetails.paths,
+            {
+              path: currentElement.path,
+              coordinates: {
+                position: [position[0], position[1], position[2] + 0.2],
+                rotation: rotation,
+              },
+            },
+          ],
+        });
+        setAddMoreElements(false);
+      } else {
+        const indexValue = elementDetails.elements.indexOf(element.type);
+        elementDetails.elements.splice(indexValue, 1, element.type);
+        elementDetails.types.splice(indexValue, 1, element.id);
+        elementDetails.paths.splice(indexValue, 1, {
+          path: element.path,
+          coordinates: { position: position, rotation: rotation },
+        });
 
-      setElemenetDetails({
-        elements: elementDetails.elements,
-        types: elementDetails.types,
-        paths: elementDetails.paths,
-      });
+        setElemenetDetails({
+          elements: elementDetails.elements,
+          types: elementDetails.types,
+          paths: elementDetails.paths,
+        });
+      }
     } else {
       position &&
         rotation &&
@@ -65,16 +87,21 @@ const ApplianceSelectOptions = ({ selectedElement }) => {
       {dynamicAssets.map((element, index) => {
         if (selectedElement === element.type) {
           return (
-            <Button
-              key={index}
-              w={"100%"}
-              variant={"outline"}
-              fontSize={14}
-              fontWeight={400}
-              onClick={() => handleElementSelect(element)}
-            >
-              {element?.name}
-            </Button>
+            <>
+              <Button
+                key={index}
+                w={"100%"}
+                variant={"outline"}
+                fontSize={14}
+                fontWeight={400}
+                onClick={() => {
+                  handleElementSelect(element);
+                  setCurrentElement(element);
+                }}
+              >
+                {element?.name}
+              </Button>
+            </>
           );
         }
       })}
@@ -85,7 +112,19 @@ const ApplianceSelectOptions = ({ selectedElement }) => {
         fontWeight={400}
         onClick={() => handleElementSelect({ type: selectedElement, path: "" })}
       >
-        None
+        <MdDelete />
+      </Button>
+      <Button
+        w={"100%"}
+        variant={"outline"}
+        fontSize={14}
+        fontWeight={400}
+        onClick={() => {
+          setAddMoreElements(true);
+          handleElementSelect(currentElement);
+        }}
+      >
+        <MdAdd />
       </Button>
     </Stack>
   );

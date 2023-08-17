@@ -38,4 +38,11 @@ export const dynamicAssets = [
     name: "Steel Chair",
     path: "/assets/chairs/Chair.gltf",
   },
+  {
+    id: 6,
+    type: "chair",
+    icon: <GiOfficeChair />,
+    name: "Wood Chair",
+    path: "/assets/chairs/Chair.gltf",
+  },
 ];

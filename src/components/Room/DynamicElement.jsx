@@ -33,8 +33,6 @@ const DynamicElement = ({ path, coordinates }) => {
     }
   }, [objectRef.current]);
 
-  console.log("coordinates", coordinates);
-
   return (
     coordinates && (
       <>
