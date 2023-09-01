@@ -77,7 +77,7 @@ const Room = () => {
             )}
           </Center>
           <OrbitControls enabled={view} />
-          <Environment files={"/assets/room/yoga_room_4k.hdr"} background />
+          <Environment files={"/assets/room/yoga_room_4k.hdr"} />
           <SoftShadows samples={10} focus={0} size={20} />
         </Canvas>
       </Suspense>
